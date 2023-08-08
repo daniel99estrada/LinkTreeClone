@@ -1,52 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import Link from './Link';
 import AddLink from './AddLink';
+import axios from 'axios';
+import ApiCaller from './ApiCaller';
+
+const apiURL = 'https://ttmoh9fsnb.execute-api.us-east-1.amazonaws.com/dev/links';
 
 function App() {
-  const [links, setLinks] = useState<{ name: string; url: string }[]>([]);
+  const [links, setLinks] = useState<{ Name: string; URL: string }[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const addLink = (name: string, url: string) => {
-    const newLink = { name, url };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(apiURL);
+        const responseData = response.data;
+        setLinks(responseData);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const addLink = (Name: string, URL: string) => {
+    console.log('Adding new link:', Name, URL);
+    const newLink = { Name, URL };
     setLinks([...links, newLink]);
   };
 
-  useEffect(() => {
-    console.log('Loading links from localStorage');
-    const storedLinks = localStorage.getItem('links');
-    if (storedLinks) {
-      setLinks(JSON.parse(storedLinks));
-    }
-  }, []);
-
-  useEffect(() => {
-    console.log('Saving links to localStorage');
-    localStorage.setItem('links', JSON.stringify(links));
-  }, [links]);
-
   const deleteLink = (index: number) => {
-    // Remove the link at the given index from the links state
     const updatedLinks = [...links];
     updatedLinks.splice(index, 1);
     setLinks(updatedLinks);
   };
 
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+  
   return (
-    <div>
-      <h1>Demo</h1>
-      <ApiCaller />
+    <div >
+      <h1 className="text-3xl font-bold underline">Sunny Tali</h1>
       <AddLink onAddLink={addLink} />
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        links.map((link, index) => (
-          <Link
-            key={index}
-            linkUrl={link.url}
-            linkName={link.name}
-            onDelete={() => deleteLink(index)} // Pass the deleteLink function as onDelete prop
-          />
-        ))
-      )}
+      {links.map((link, index) => (
+        <Link
+          key={index}
+          linkUrl={link.URL} // Use 'URL' instead of 'url'
+          linkName={link.Name} // Use 'Name' instead of 'Name'
+          onDelete={() => deleteLink(index)}
+        />
+      ))}
     </div>
   );
 }
