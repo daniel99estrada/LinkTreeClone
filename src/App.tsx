@@ -1,27 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Link from './Link';
 import AddLink from './AddLink';
-import axios from "axios";
 
 function App() {
   const [links, setLinks] = useState<{ name: string; url: string }[]>([]);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        'https://ttmoh9fsnb.execute-api.us-east-1.amazonaws.com/dev'
-      );
-
-      // Assuming the response data is an array of items
-      const items = response.data;
-
-      // Print the contents of the body to the console
-      console.log(items);
-      
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
 
   const addLink = (name: string, url: string) => {
     const newLink = { name, url };
@@ -29,8 +11,17 @@ function App() {
   };
 
   useEffect(() => {
-    fetchData();
+    console.log('Loading links from localStorage');
+    const storedLinks = localStorage.getItem('links');
+    if (storedLinks) {
+      setLinks(JSON.parse(storedLinks));
+    }
   }, []);
+
+  useEffect(() => {
+    console.log('Saving links to localStorage');
+    localStorage.setItem('links', JSON.stringify(links));
+  }, [links]);
 
   const deleteLink = (index: number) => {
     // Remove the link at the given index from the links state
@@ -41,16 +32,21 @@ function App() {
 
   return (
     <div>
-      <h1>Hello</h1>
+      <h1>Demo</h1>
+      <ApiCaller />
       <AddLink onAddLink={addLink} />
-      {links.map((link, index) => (
-        <Link
-          key={index}
-          linkUrl={link.url}
-          linkName={link.name}
-          onDelete={() => deleteLink(index)} // Pass the deleteLink function as onDelete prop
-        />
-      ))}
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        links.map((link, index) => (
+          <Link
+            key={index}
+            linkUrl={link.url}
+            linkName={link.name}
+            onDelete={() => deleteLink(index)} // Pass the deleteLink function as onDelete prop
+          />
+        ))
+      )}
     </div>
   );
 }
