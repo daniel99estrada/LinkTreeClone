@@ -1,25 +1,26 @@
 import React from 'react';
 
-interface LinkProps {
-  linkUrl: string;
-  linkName: string;
-  onDelete: () => void; // Add the onDelete prop
-}
-
-const Link: React.FC<LinkProps> = ({ linkUrl, linkName, onDelete }) => {
-  console.log('Received linkName:', linkName);
-
+const Link = ({ linkUrl, linkName, onDelete }) => {
   const handleDeleteClick = () => {
-    onDelete(); // Call the onDelete function to remove the link
+    onDelete();
   };
 
   return (
-    <div>
-      <button onClick={() => window.open(linkUrl, '_blank')}>{linkName}</button>
-      <button onClick={handleDeleteClick}>Delete</button>
+    <div className="flex justify-between items-center border rounded px-4 py-2 bg-white">
+      <button
+        className="text-blue-500 hover:text-blue-700 focus:outline-none font-sans font-medium text-black"
+        onClick={() => window.open(linkUrl, '_blank')}
+      >
+        {linkName}
+      </button>
+      <button
+        className="text-red-500 hover:text-red-700 focus:outline-none"
+        onClick={handleDeleteClick}
+      >
+        Delete
+      </button>
     </div>
   );
 };
-
 
 export default Link;

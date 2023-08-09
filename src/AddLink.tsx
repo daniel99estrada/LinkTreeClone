@@ -1,45 +1,45 @@
 import React, { useState } from 'react';
 
-interface AddLinkProps {
-  onAddLink: (name: string, url: string) => void;
-}
-
-const AddLink: React.FC<AddLinkProps> = ({ onAddLink }) => {
+const AddLink = ({ onAddLink }) => {
   const [linkName, setLinkName] = useState('');
   const [linkUrl, setLinkUrl] = useState('');
 
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNameChange = (event) => {
     setLinkName(event.target.value);
   };
 
-  const handleUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUrlChange = (event) => {
     setLinkUrl(event.target.value);
   };
 
   const handleAddClick = () => {
-    // Call the onAddLink function with the link name and link URL
     onAddLink(linkName, linkUrl);
-
-    // Clear the input fields after adding the link
     setLinkName('');
     setLinkUrl('');
   };
 
   return (
-    <div>
+    <div className="flex space-x-2">
       <input
+        className="border rounded px-2 py-1 w-1/3"
         type="text"
         placeholder="Link Name"
         value={linkName}
         onChange={handleNameChange}
       />
       <input
+        className="border rounded px-2 py-1 w-2/3"
         type="text"
         placeholder="Link URL"
         value={linkUrl}
         onChange={handleUrlChange}
       />
-      <button onClick={handleAddClick}>Add</button>
+      <button
+        className="bg-blue-500 text-white rounded px-4 py-2"
+        onClick={handleAddClick}
+      >
+        Add
+      </button>
     </div>
   );
 };
