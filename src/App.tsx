@@ -3,6 +3,7 @@ import Link from './Link';
 import AddLink from './AddLink';
 import axios from 'axios';
 import ApiCaller from './ApiCaller';
+import EditButton from './EditButton'; 
 
 const apiURL = 'https://ttmoh9fsnb.execute-api.us-east-1.amazonaws.com/dev/links';
 
@@ -47,18 +48,11 @@ function App() {
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen p-8">
-      <div className="flex justify-end mb-4">
-        <button
-          className="bg-blue-500 text-white px-2 py-1 rounded text-sm"
-          onClick={toggleEditMode}
-        >
-          Edit
-        </button>
-      </div>
-      <h1 className="text-3xl font-bold mb-4">LinkTree Clone</h1>
+    <div className="bg-zinc-700 min-h-screen p-8">
+      <EditButton onToggle={toggleEditMode}/>
+      <h1 className="flex text-white justify-center text-3xl font-sm mb-4">LinkTree Clone</h1>
 
-      <AddLink onAddLink={addLink} />
+      { editMode &&<AddLink onAddLink={addLink} />}
       <div className="mt-4 space-y-2">
         {links.map((link, index) => (
           <Link

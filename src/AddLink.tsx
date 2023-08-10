@@ -35,7 +35,7 @@ const AddLink = ({ onAddLink }) => {
         onChange={handleUrlChange}
       />
       <button
-        className="bg-blue-500 text-white rounded px-4 py-2"
+        className="inline-block bg-zinc-400 hover:bg-zinc-500  text-white px-2 rounded px-4 py-2"
         onClick={handleAddClick}
       >
         Add
