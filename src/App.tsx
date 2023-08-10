@@ -6,6 +6,8 @@ import ApiCaller from './ApiCaller';
 import EditButton from './EditButton'; 
 
 const apiURL = 'https://ttmoh9fsnb.execute-api.us-east-1.amazonaws.com/dev/links';
+const postApiURL = "https://ttmoh9fsnb.execute-api.us-east-1.amazonaws.com/dev/post-link";
+const deleteApiURL = "https://ttmoh9fsnb.execute-api.us-east-1.amazonaws.com/dev/delete";
 
 function App() {
   const [links, setLinks] = useState([]);
@@ -13,29 +15,47 @@ function App() {
   const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(apiURL);
-        const responseData = response.data;
-        setLinks(responseData);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(apiURL);
+      const responseData = response.data;
+      setLinks(responseData);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   const addLink = (name, url) => {
     const newLink = { Name: name, URL: url };
     setLinks([...links, newLink]);
+    postNewLink(newLink);
   };
 
+  const postNewLink = async (linkData) => {
+    try {
+      await axios.post(postApiURL, linkData);
+    } catch (error) {
+      console.error('Error posting new link:', error);
+    }
+  };
+  
   const deleteLink = (index) => {
     const updatedLinks = [...links];
+    const deletedLink = links[index];
     updatedLinks.splice(index, 1);
     setLinks(updatedLinks);
+    
+    try {
+      axios.delete(deleteApiURL, {
+        data: deletedLink // Pass the deletedLink as the request body
+      });
+    } catch (error) {
+      console.error('Error deleting link:', error);
+    }
   };
 
   const toggleEditMode = () => {
