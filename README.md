@@ -2,6 +2,17 @@
 
 A simple web application built with React, showcasing a LinkTree clone. It allows you to add and manage links.
 
+## Table of Contents
+
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Deployment](#deployment)
+- [Architecture](#architecture)
+- [Author](#author)
+- [License](#license)
+
 ## Features
 
 - View and manage a list of links
@@ -35,7 +46,7 @@ The app is ready for deployment. You can deploy it to platforms like Netlify, Ve
 
 # Author
 
-Your Name
+Daniel Estrada
 
 # License
 
