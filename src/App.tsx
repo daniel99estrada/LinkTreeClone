@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'; // Import React and other required hooks
 import Link from './Link';
 import AddLink from './AddLink';
 import axios from 'axios';
@@ -9,15 +9,15 @@ const postApiURL = "https://ttmoh9fsnb.execute-api.us-east-1.amazonaws.com/dev/p
 const deleteApiURL = "https://ttmoh9fsnb.execute-api.us-east-1.amazonaws.com/dev/delete";
 
 function App() {
-  const [links, setLinks] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [editMode, setEditMode] = useState(false);
+  const [links, setLinks] = useState<Link[]>([]); // Explicitly specify type for links state
+  const [loading, setLoading] = useState<boolean>(true);
+  const [editMode, setEditMode] = useState<boolean>(false);
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  const fetchData = async () => {
+  const fetchData = async (): Promise<void> => {
     try {
       const response = await axios.get(apiURL);
       const responseData = response.data;
@@ -28,13 +28,13 @@ function App() {
     }
   };
 
-  const addLink = (name, url) => {
+  const addLink = (name: string, url: string): void => {
     const newLink = { Name: name, URL: url };
     setLinks([...links, newLink]);
     postNewLink(newLink);
   };
 
-  const postNewLink = async (linkData) => {
+  const postNewLink = async (linkData: Link): Promise<void> => {
     try {
       await axios.post(postApiURL, linkData);
     } catch (error) {
@@ -42,7 +42,7 @@ function App() {
     }
   };
 
-  const deleteLink = async (index) => {
+  const deleteLink = async (index: number): Promise<void> => {
     try {
       const deletedLink = links[index];
       const response = await fetch(deleteApiURL, {
@@ -68,9 +68,7 @@ function App() {
     }
   };
   
-  
-
-  const toggleEditMode = () => {
+  const toggleEditMode = (): void => {
     setEditMode(!editMode);
   };
 
@@ -99,7 +97,6 @@ function App() {
       </div>
     </div>
   );
-  
 }
 
 export default App;
