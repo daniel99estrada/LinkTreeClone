@@ -1,27 +1,42 @@
-# React + TypeScript + Vite
+# LinkTree Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple web application built with React, showcasing a LinkTree clone. It allows you to add and manage links.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- View and manage a list of links
+- Add new links with names and URLs
+- Toggle edit mode to manage links
+- Delete links from the list
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React
+- Axios for HTTP requests
+- AWS Lambda for backend API
+- DynamoDB for data storage
+- Tailwind CSS for styling
 
-- Configure the top-level `parserOptions` property like this:
+## Getting Started
+# Usage
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+- Upon loading, the app will display a list of links.
+- Click the "Edit" button to enter edit mode and manage links.
+- To add a new link, click the "+ Add Link" button and provide a name and URL.
+- To delete a link, click the delete button next to the link.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+# Deployment
+
+The app is ready for deployment. You can deploy it to platforms like Netlify, Vercel, or AWS Amplify.
+
+# Architecture
+
+![Architecture](https://danielestrada12345.s3.us-east-2.amazonaws.com/1_oaoY3k8IIQlwIC-2XHoirw.png)
+
+# Author
+
+Your Name
+
+# License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
