@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'; // Import React and other required hooks
-import Link from './Link';
+import LinkComponent from './Link';
 import AddLink from './AddLink';
 import axios from 'axios';
 import EditButton from './EditButton'; 
@@ -7,6 +7,11 @@ import EditButton from './EditButton';
 const apiURL = 'https://ttmoh9fsnb.execute-api.us-east-1.amazonaws.com/dev/links';
 const postApiURL = "https://ttmoh9fsnb.execute-api.us-east-1.amazonaws.com/dev/post-link";
 const deleteApiURL = "https://ttmoh9fsnb.execute-api.us-east-1.amazonaws.com/dev/delete";
+
+type Link = {
+  Name: string;
+  URL: string;
+};
 
 function App() {
   const [links, setLinks] = useState<Link[]>([]); // Explicitly specify type for links state
@@ -85,7 +90,7 @@ function App() {
         {editMode && <AddLink onAddLink={addLink} />}
         <div className="mt-4 space-y-4">
           {links.map((link, index) => (
-            <Link
+            <LinkComponent
               key={index}
               linkUrl={link.URL}
               linkName={link.Name}
