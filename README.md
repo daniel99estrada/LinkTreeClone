@@ -29,6 +29,8 @@ A simple web application built with React, showcasing a LinkTree clone. It allow
 - Tailwind CSS for styling
 
 ## Getting Started
+- The website can be accessed here:
+    https://main--kaleidoscopic-granita-af6295.netlify.app/
 # Usage
 
 - Upon loading, the app will display a list of links.
