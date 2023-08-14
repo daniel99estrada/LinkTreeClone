@@ -1,5 +1,3 @@
-import React from 'react';
-
 type LinkProps = {
   linkUrl: string;
   linkName: string;
