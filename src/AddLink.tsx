@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import React, { useState } from 'react'; // Import React and useState
 
-const AddLink = ({ onAddLink }) => {
+type AddLinkProps = {
+  onAddLink: (name: string, url: string) => void;
+};
+
+const AddLink = ({onAddLink}: AddLinkProps) => {
   const [linkName, setLinkName] = useState('');
   const [linkUrl, setLinkUrl] = useState('');
 
-  const handleNameChange = (event) => {
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLinkName(event.target.value);
   };
 
-  const handleUrlChange = (event) => {
+  const handleUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLinkUrl(event.target.value);
   };
 
@@ -35,7 +39,7 @@ const AddLink = ({ onAddLink }) => {
         onChange={handleUrlChange}
       />
       <button
-        className="inline-block bg-zinc-400 hover:bg-zinc-500  text-white px-2 rounded px-4 py-2"
+        className="inline-block bg-zinc-400 hover:bg-zinc-500 text-white px-2 rounded px-4 py-2"
         onClick={handleAddClick}
       >
         Add
